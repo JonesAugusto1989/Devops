@@ -7,9 +7,14 @@ jobs:
   build-and-deploy:
     runs-on: self-hosted
     steps:
-      - name: Setup Maven Action
-        uses: s4u/setup-maven-action@v1.18.0
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Java
+        uses: actions/setup-java
         with:
-          java-distribution: temurin
-          java-version: 21
-          maven-version: 3.9.9
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: '3.8.2'
