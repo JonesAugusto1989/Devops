@@ -1,7 +1,0 @@
-name: Teste
-on: push
-jobs:
-  teste:
-    runs-on: self-hosted
-    steps:
-      - run: echo "Teste de workflow"

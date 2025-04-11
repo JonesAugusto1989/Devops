@@ -1,12 +1,7 @@
-name: Deploy2Prod
-on:
-  push:
-    branches:
-      - "main"
+name: Teste
+on: push
 jobs:
-  build-and-deploy:
+  teste:
     runs-on: self-hosted
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        
+    steps:
+      - run: echo "Teste de workflow"
