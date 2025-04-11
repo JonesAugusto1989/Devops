@@ -8,4 +8,5 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Checkout2
-        uses: actions/checkout@v4
+        run: |
+          echo test
