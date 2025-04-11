@@ -41,6 +41,7 @@ jobs:
           mvn versions:set -DnewVersion=$next
 
           echo "new_version=$next" >> "$GITHUB_OUTPUT"
+          shell: bash
 
       - name: Build
         run: mvn package -DskipTests
