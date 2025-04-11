@@ -24,5 +24,7 @@ jobs:
           mvn -version
       - name: Clean
         run: mvn clean
+        working-directory: ./workspace/CadastroCliente
       - name: Executar testes
         run: mvn test
+        working-directory: ./workspace/CadastroCliente
