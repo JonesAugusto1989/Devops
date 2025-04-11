@@ -31,6 +31,7 @@ jobs:
       - name: Incrementar Versao
         id: versao
         shell: powershell
+        working-directory: ./workspace/CadastroCliente
         run: |
           $current = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
           Write-Host "Versão atual: $current"
