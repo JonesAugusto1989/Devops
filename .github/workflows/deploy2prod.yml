@@ -29,8 +29,10 @@ jobs:
       #  run: mvn test
       #  working-directory: ./workspace/CadastroCliente
       - name: Incrementar Versao
+        id: versao
+        shell: pwsh
         run: |
-             $current = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+          $current = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
           Write-Host "Versão atual: $current"
 
           $parts = $current -split '\.'
@@ -44,8 +46,7 @@ jobs:
 
           mvn versions:set -DnewVersion=$next
 
-        
-
+          "new_version=$next" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append       
       - name: Build
         run: mvn package -DskipTests
         working-directory: ./workspace/CadastroCliente
