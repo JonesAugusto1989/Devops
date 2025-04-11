@@ -4,4 +4,4 @@ jobs:
   teste:
     runs-on: self-hosted
     steps:
-      - run: echo "Teste2"
+      - run: echo "Teste"
