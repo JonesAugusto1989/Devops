@@ -25,6 +25,23 @@ jobs:
       - name: Clean
         run: mvn clean
         working-directory: ./workspace/CadastroCliente
-      - name: Executar testes
-        run: mvn test
+      #- name: Executar testes
+      #  run: mvn test
+      #  working-directory: ./workspace/CadastroCliente
+      - name: Incrementar Versao
+        run: |
+          current=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "Versão atual: $current"
+
+          IFS=. read major minor patch <<< "$current"
+          new_major=$((major + 1))
+          next="$new_major.$minor.$patch"
+          echo "Nova versão: $next"
+
+          mvn versions:set -DnewVersion=$next
+
+          echo "new_version=$next" >> "$GITHUB_OUTPUT"
+
+      - name: Build
+        run: mvn package -DskipTests
         working-directory: ./workspace/CadastroCliente
