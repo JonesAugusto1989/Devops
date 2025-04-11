@@ -30,18 +30,21 @@ jobs:
       #  working-directory: ./workspace/CadastroCliente
       - name: Incrementar Versao
         run: |
-          current=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "Versão atual: $current"
+             $current = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+          Write-Host "Versão atual: $current"
 
-          IFS=. read major minor patch <<< "$current"
-          new_major=$((major + 1))
-          next="$new_major.$minor.$patch"
-          echo "Nova versão: $next"
+          $parts = $current -split '\.'
+          $major = [int]$parts[0]
+          $minor = $parts[1]
+          $patch = $parts[2]
+
+          $new_major = $major + 1
+          $next = "$new_major.$minor.$patch"
+          Write-Host "Nova versão: $next"
 
           mvn versions:set -DnewVersion=$next
 
-          echo "new_version=$next" >> "$GITHUB_OUTPUT"
-          shell: bash
+        
 
       - name: Build
         run: mvn package -DskipTests
