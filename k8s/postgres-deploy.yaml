@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: cliente
+  name: postgres-deploy
+  labels:
+    database: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      database: postgres
+  template:
+    metadata:
+      name: postgresdb
+      labels:
+        database: postgres
+    spec:
+      volumes:
+        - name: postgresdb
+          persistentVolumeClaim: 
+            claimName: postgres-pvc
+      containers:
+        - name: postgresdb
+          image: jonesparanhos/clientes_db:latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdb
+        - name: postgres-monitor
+          image: quay.io/prometheuscommunity/postgres-exporter
+          env:
+            - name: DATA_SOURCE_URI
+              value: "localhost:5432/cliente_db?sslmode=disable"
+            - name: DATA_SOURCE_USER
+              value: "postgres"
+            - name: DATA_SOURCE_PASS
+              value: "123456"

@@ -1,0 +1,5 @@
+FROM postgres:latest
+ENV POSTGRES_PASSWORD=123456
+ENV POSTGRES_DB=cliente_db
+COPY clientes_db_dump.sql /docker-entrypoint-initdb.d/
+EXPOSE 5432

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: cliente
+  name: prometheus-deploy
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      name: prometheus
+      labels:
+        app: prometheus
+    spec:
+      containers:
+        - image: prom/prometheus
+          name: prometheus
+          imagePullPolicy: IfNotPresent
+          readinessProbe:
+            httpGet:
+              port: 9090
+              path: /-/ready
+            initialDelaySeconds: 4
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              port: 9090
+              path: /-/healthy
+            initialDelaySeconds: 8
+            failureThreshold: 3
+            successThreshold: 1
+          volumeMounts:
+          - name: prometheuspv
+            mountPath: /etc/prometheus/
+      volumes:
+        - name: prometheuspv
+          configMap: 
+            name: prometheus-configmap
+            items:
+              - key: prometheus.yml
+                path: prometheus.yml
+          
