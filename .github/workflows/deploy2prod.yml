@@ -8,7 +8,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Setup Maven Action
-        uses: s4u/setup-maven-action@1.18.0
+        uses: s4u/setup-maven-action@v1.18.0
         with:
           java-distribution: temurin
           java-version: 21
