@@ -30,7 +30,7 @@ jobs:
       #  working-directory: ./workspace/CadastroCliente
       - name: Incrementar Versao
         id: versao
-        shell: pwsh
+        shell: powershell
         run: |
           $current = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
           Write-Host "Versão atual: $current"
