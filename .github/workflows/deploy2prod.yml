@@ -36,8 +36,9 @@ jobs:
         working-directory: ./workspace/CadastroCliente
      #- name: Check code version
       # echo "nova versão é": ${{steps.increment-version.new_version}}
-      - name: Verificar estrutura de diretórios
-        run: ls -l ./workspace
+      - name: Listar arquivos em CadastroCliente
+          run: ls -l ./workspace/CadastroCliente
+
       - name: Definir variáveis de versão
         run: |
           echo "parsedVersion_majorVersion=1" >> $GITHUB_ENV
