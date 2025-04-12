@@ -36,8 +36,6 @@ jobs:
         working-directory: ./workspace/CadastroCliente
      #- name: Check code version
       # echo "nova versão é": ${{steps.increment-version.new_version}}
-      - name: Listar arquivos em CadastroCliente
-        run: ls -l ./workspace/CadastroCliente
 
       - name: Definir variáveis de versão
         run: |
@@ -50,12 +48,14 @@ jobs:
           echo "parsedVersion_nextMinorVersion=$parsedVersion_nextMinorVersion"
 
       - name: Atualiza a versão Minor
-        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT" versions:commit -f ./workspace/CadastroCliente/pom.xml
-
+        working-directory: ./workspace/CadastroCliente/
+        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT" versions:commit
 
       - name: Atualiza a versão Major
+        working-directory: ./workspace/CadastroCliente
         run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_nextMajorVersion}.${parsedVersion_minorVersion}.0-SNAPSHOT" versions:commit
 
       - name: Realiza o release
+        working-directory: ./workspace/CadastroCliente
         run: mvn --batch-mode release:clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
 
