@@ -40,9 +40,18 @@ jobs:
         run: |
           echo "parsedVersion_majorVersion=1" >> $GITHUB_ENV
           echo "parsedVersion_nextMinorVersion=2" >> $GITHUB_ENV
+
+      - name: Depuração das variáveis
+        run: |
+          echo "parsedVersion_majorVersion=$parsedVersion_majorVersion"
+          echo "parsedVersion_nextMinorVersion=$parsedVersion_nextMinorVersion"
+
       - name: Atualiza a versão Minor
-        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.0-SNAPSHOT versions:commit
+        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT" versions:commit
+
       - name: Atualiza a versão Major
-        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion=${parsedVersion.nextMajorVersion}.${parsedVersion.minorVersion}.0-SNAPSHOT versions:commit
-      - name:
+        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_nextMajorVersion}.${parsedVersion_minorVersion}.0-SNAPSHOT" versions:commit
+
+      - name: Realiza o release
         run: mvn --batch-mode release:clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
+
