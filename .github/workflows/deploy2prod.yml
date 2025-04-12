@@ -12,6 +12,7 @@ jobs:
       - name: ConfigGit
         run: |
           git config user.name "JonesAugusto1989"
+          git config user.email "jassp1989@gmail.com"
       - name: Java
         uses: actions/setup-java@v4
         with:
