@@ -24,6 +24,7 @@ RUN apt-get update
 
 # I only install the CLI, we will run docker in another container!
 RUN apt-get install -y docker-ce-cli
+RUN apt-get install -y git
 
 # Install the GitHub Actions Runner 
 RUN apt-get update && apt-get install -y sudo jq
