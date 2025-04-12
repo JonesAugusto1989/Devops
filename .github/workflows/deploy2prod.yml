@@ -50,7 +50,8 @@ jobs:
           echo "parsedVersion_nextMinorVersion=$parsedVersion_nextMinorVersion"
 
       - name: Atualiza a versão Minor
-        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT" versions:commit
+        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT" versions:commit -f ./workspace/CadastroCliente/pom.xml
+
 
       - name: Atualiza a versão Major
         run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_nextMajorVersion}.${parsedVersion_minorVersion}.0-SNAPSHOT" versions:commit
