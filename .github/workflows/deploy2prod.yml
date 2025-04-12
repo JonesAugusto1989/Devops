@@ -54,7 +54,13 @@ jobs:
       - name: Atualiza a versão Major
         working-directory: ./workspace/CadastroCliente
         run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_nextMajorVersion}.${parsedVersion_minorVersion}.0-SNAPSHOT" versions:commit
-
+      
+      - name: Commit do POM
+        working-directory: ./workspace/CadastroCliente
+        run: |
+          git add pom.xml
+          git commit -m "Alterando a versão do projeto"
+          git push origin main
       - name: Realiza o release
         working-directory: ./workspace/CadastroCliente
         run: mvn --batch-mode release:clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
