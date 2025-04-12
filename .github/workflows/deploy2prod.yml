@@ -36,8 +36,8 @@ jobs:
         working-directory: ./workspace/CadastroCliente
      #- name: Check code version
       # echo "nova versão é": ${{steps.increment-version.new_version}}
-      - name: Verificar se o caminho do POM está correto
-        run: ls -l /work/Devops/Devops/CadastroCliente
+      - name: Verificar estrutura de diretórios
+        run: ls -l ./workspace
       - name: Definir variáveis de versão
         run: |
           echo "parsedVersion_majorVersion=1" >> $GITHUB_ENV
