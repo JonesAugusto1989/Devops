@@ -1,0 +1,31 @@
+FROM ubuntu:24.04
+ARG RUNNER_VERSION
+ENV DEBIAN_FRONTEND=noninteractive
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+RUN apt-get update -y && apt-get upgrade -y && useradd -m docker
+
+
+RUN apt-get install -y --no-install-recommends \
+        curl \
+        wget \
+        git \
+        unzip \
+        tar \
+        ca-certificates \
+        openjdk-21-jdk \
+        maven \
+        libssl-dev \
+        jq \
+        && rm -rf /var/lib/apt/lists/*
+
+
+RUN cd /home/docker && mkdir actions-runner && cd actions-runner \
+    && curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \
+    && tar xzf ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
+
+RUN chown -R docker ~docker && /home/docker/actions-runner/bin/installdependencies.sh
+ADD scripts/start.sh start.sh
+RUN chmod +x start.sh
+USER docker
+
+ENTRYPOINT ["./start.sh"]

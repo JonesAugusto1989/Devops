@@ -36,13 +36,18 @@ spec:
             failureThreshold: 3
             successThreshold: 1
           volumeMounts:
-          - name: prometheuspv
+          - name: prometheusconfigmap
             mountPath: /etc/prometheus/
+          - name: prometheuspv
+            mountPath: /prometheus
       volumes:
-        - name: prometheuspv
+        - name: prometheusconfigmap
           configMap: 
             name: prometheus-configmap
             items:
               - key: prometheus.yml
                 path: prometheus.yml
+        - name: prometheuspv
+          persistentVolumeClaim:
+            claimName: prometheus-pvc
           

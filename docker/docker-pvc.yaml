@@ -1,12 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  namespace: cliente
-  name: prometheus-pvc
+  name: dockerrunner-pvc
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 300Mi
-  storageClassName: standard

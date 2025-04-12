@@ -7,6 +7,9 @@ jobs:
   build-and-deploy:
     runs-on: self-hosted
     steps:
+      - name: ConfigGit
+        run: |
+          git config user.name "JonesAugusto1989"
       - name: Checkout
         uses: actions/checkout@v4
       - name: Java
@@ -28,35 +31,14 @@ jobs:
       #- name: Executar testes
       #  run: mvn test
       #  working-directory: ./workspace/CadastroCliente
-      - name: Incrementar Versao
-        id: versao
-        shell: powershell
-        working-directory: ./workspace/CadastroCliente
-        run: |  
-          $current = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
-          Write-Host "Versão atual: $current"
-
-          # Verifica se a versão retornada é válida
-          if ($current -match '^\d+\.\d+\.\d+$') {
-              $parts = $current -split '\.'
-              $major = [int]$parts[0]
-              $minor = $parts[1]
-              $patch = $parts[2]
-
-              $new_major = $major + 1
-              $next = "$new_major.$minor.$patch"
-
-              Write-Host "Nova versão: $next"
-
-              # Usa o operador & para invocar corretamente o comando com parâmetro
-              & mvn versions:set "-DnewVersion=$next"
-
-              # Exporta a nova versão
-              "new_version=$next" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
-          } else {
-              Write-Error "Formato de versão inválido retornado: $current"
-              exit 1
-          }
       - name: Build
         run: mvn package -DskipTests
         working-directory: ./workspace/CadastroCliente
+     #- name: Check code version
+      # echo "nova versão é": ${{steps.increment-version.new_version}}
+      - name: Atualiza a versão Minor
+        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.0-SNAPSHOT versions:commit
+      - name: Atualiza a versão Major
+        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion=${parsedVersion.nextMajorVersion}.${parsedVersion.minorVersion}.0-SNAPSHOT versions:commit
+      - name:
+        run: mvn --batch-mode release:clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
