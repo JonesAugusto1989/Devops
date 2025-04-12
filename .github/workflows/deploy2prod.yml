@@ -36,6 +36,10 @@ jobs:
         working-directory: ./workspace/CadastroCliente
      #- name: Check code version
       # echo "nova versão é": ${{steps.increment-version.new_version}}
+      - name: Definir variáveis de versão
+        run: |
+          echo "parsedVersion_majorVersion=1" >> $GITHUB_ENV
+          echo "parsedVersion_nextMinorVersion=2" >> $GITHUB_ENV
       - name: Atualiza a versão Minor
         run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion=${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.0-SNAPSHOT versions:commit
       - name: Atualiza a versão Major
