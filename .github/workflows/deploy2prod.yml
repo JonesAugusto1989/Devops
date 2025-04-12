@@ -36,6 +36,8 @@ jobs:
         working-directory: ./workspace/CadastroCliente
      #- name: Check code version
       # echo "nova versão é": ${{steps.increment-version.new_version}}
+      - name: Executar Maven com o caminho correto
+        run: mvn -f /work/Devops/Devops/CadastroCliente/pom.xml clean install
       - name: Definir variáveis de versão
         run: |
           echo "parsedVersion_majorVersion=1" >> $GITHUB_ENV
