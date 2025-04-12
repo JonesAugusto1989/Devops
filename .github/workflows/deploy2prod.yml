@@ -37,7 +37,7 @@ jobs:
      #- name: Check code version
       # echo "nova versão é": ${{steps.increment-version.new_version}}
       - name: Listar arquivos em CadastroCliente
-          run: ls -l ./workspace/CadastroCliente
+        run: ls -l ./workspace/CadastroCliente
 
       - name: Definir variáveis de versão
         run: |
