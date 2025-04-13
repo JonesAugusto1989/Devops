@@ -74,16 +74,20 @@ jobs:
      # - name: Build da imagem
      #   run: 
      #     docker build . -f app/dockerfile -t CadastroCliente:4.0
+      - name: docker login
+        run: echo ${{secrets.DOCKER_TOKEN}} | docker login --username ${{secrets.DOCKERHUB_USERNAME}} -- password-stdin
+
       - name: Criar tag
-        run: docker tag CadastroCliente:4.0 JonesAugusto1989/CadastroCliente:latest
-      
-      - name:  docker login
-        run: |
-           echo ${{secrets.DOCKER_TOKEN}} | docker login --username ${{secrets.DOCKERHUB_USERNAME}} -- password-stdin
+        run: docker tag CadastroCliente:3.0 JonesAugusto1989/CadastroCliente:3.0
+
       - name: docker push
-        run: | 
-             docker push JonesAugusto1989/CadastroCliente:latest
-             docker push JonesAugusto1989/CadastroCliente:latest
+        run: docker push JonesAugusto1989/CadastroCliente:3.0
+      
+      - name: Criar tag
+        run: docker tag CadastroCliente:3.0 JonesAugusto1989/CadastroCliente:latest
+
+      - name: docker push
+        run:  docker push JonesAugusto1989/CadastroCliente:latest  
       # - name: Realiza o release
        #  working-directory: ./workspace/CadastroCliente
        #  run: mvn --batch-mode release: clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
