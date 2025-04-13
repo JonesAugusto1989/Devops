@@ -42,10 +42,11 @@ jobs:
           $APP_JAR_PATH = "../../app/app.jar"
           cp target/*.jar $APP_JAR_PATH
 
-     # - name: Build da imagem
-     #   run: 
-     #     docker build . -f app/dockerfile -t CadastroCliente:4.0
-      - name: docker login (PowerShell)
+      - name: Build da imagem
+        run: 
+           docker build . -f app/dockerfile -t CadastroCliente:4.0
+
+      - name: docker login
         shell: powershell
         run: |
              $password = "${{ secrets.DOCKER_TOKEN }}"
