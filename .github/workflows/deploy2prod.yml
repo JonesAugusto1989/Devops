@@ -46,9 +46,9 @@ jobs:
      #   run: 
      #     docker build . -f app/dockerfile -t CadastroCliente:4.0
       - name: docker login
-        shell: bash
+        shell: powershell
         run: |
-              echo "${{ secrets.DOCKER_TOKEN }}" | docker login --username "${{ secrets.USER_NAME }}" --password-stdin
+          echo "${{ secrets.DOCKER_TOKEN }}" | docker login --username "${{ secrets.USER_NAME }}" --password-stdin
 
       - name: Criar tag
         run: docker tag CadastroCliente:3.0 JonesAugusto1989/CadastroCliente:3.0
