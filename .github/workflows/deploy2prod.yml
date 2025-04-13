@@ -48,7 +48,7 @@ jobs:
       - name: docker login
         shell: bash
         run: |
-            echo "${{ secrets.DOCKER_TOKEN }}" | docker login --username "${{ secrets.USER_NAME }}" --password-stdin
+              echo "${{ secrets.DOCKER_TOKEN }}" | docker login --username "${{ secrets.USER_NAME }}" --password-stdin
 
       - name: Criar tag
         run: docker tag CadastroCliente:3.0 JonesAugusto1989/CadastroCliente:3.0
