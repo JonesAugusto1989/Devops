@@ -15,6 +15,5 @@ spring:
       host: 10.100.11.151
       port: 6379
       timeout: 1800
-      repositories:
+      repositories: q
         enabled: true
-
