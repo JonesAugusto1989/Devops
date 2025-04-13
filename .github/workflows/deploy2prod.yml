@@ -58,7 +58,7 @@ jobs:
 
       - name: confirmarVersao
         run: |
-              echo "A versão final é teste: " ${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT
+               echo "A versão final é teste: " ${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT
      # - name: Commit do POM
       #  working-directory: ./workspace/CadastroCliente
        # run: |
