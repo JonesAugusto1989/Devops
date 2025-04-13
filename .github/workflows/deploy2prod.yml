@@ -71,10 +71,19 @@ jobs:
              APP_JAR_PATH="../../app/app.jar"
              cp target/*.jar $APP_JAR_PATH
 
-      - name: Build da imagem
-        run: 
-          docker build . -f app/dockerfile -t CadastroCliente:4.0
-          
+     # - name: Build da imagem
+     #   run: 
+     #     docker build . -f app/dockerfile -t CadastroCliente:4.0
+      - name: Criar tag
+        run: docker tag CadastroCliente:4.0 JonesAugusto1989/CadastroCliente:latest
+      
+      - name:  docker login
+        run: |
+           echo ${{secrets.DOCKER_TOKEN}} | docker login --username ${{secrets.DOCKERHUB_USER}} -- password-stdin
+      - name: docker push
+        run: | 
+             docker push JonesAugusto1989/CadastroCliente:latest
+             docker push JonesAugusto1989/CadastroCliente:latest
       # - name: Realiza o release
        #  working-directory: ./workspace/CadastroCliente
        #  run: mvn --batch-mode release: clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
