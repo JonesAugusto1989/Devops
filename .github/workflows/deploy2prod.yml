@@ -76,7 +76,7 @@ jobs:
      #     docker build . -f app/dockerfile -t CadastroCliente:4.0
       - name: docker login
         run: |
-            docker login --username "${{ secrets.DOCKERHUB_USER }}" --password-stdin <<< "${{ secrets.DOCKER_TOKEN }}"
+            docker login --username "${{ secrets.USER_NAME }}" --password-stdin <<< "${{ secrets.DOCKER_TOKEN }}"
 
 
       - name: Criar tag
