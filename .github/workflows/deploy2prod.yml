@@ -72,10 +72,9 @@ jobs:
              cp target/*.jar $APP_JAR_PATH
 
       - name: Build da imagem
-        run: |
-              docker build . -f app/dockerfile -t CadastroCliente:4.0
+        run: docker build . -f app/dockerfile -t CadastroCliente:4.0
           
       # - name: Realiza o release
        #  working-directory: ./workspace/CadastroCliente
-       #  run: mvn --batch-mode release:clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
+       #  run: mvn --batch-mode release: clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
 
