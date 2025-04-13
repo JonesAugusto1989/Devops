@@ -41,7 +41,7 @@ jobs:
       - name: Define a versão do projeto
         run: |
           echo "parsedVersion_majorVersion=2" >> $GITHUB_ENV
-          echo "parsedVersion_nextMinorVersion=0" >> $GITHUB_ENV
+          echo "parsedVersion_nextMinorVersion=5" >> $GITHUB_ENV
 
       - name: Mostrar alteração a ser efetuada.
         run: |
@@ -62,6 +62,9 @@ jobs:
             git add pom.xml
             git commit -m "Alterando a versão do projeto"
             git push origin main
+      - name: confirmarVersao
+        run: |
+              echo "A versão final é teste: " ${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT
       # - name: Realiza o release
        #  working-directory: ./workspace/CadastroCliente
        #  run: mvn --batch-mode release:clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
