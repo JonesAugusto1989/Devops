@@ -39,8 +39,8 @@ jobs:
       - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
-             APP_JAR_PATH="../../app/app.jar"
-             cp target/*.jar $APP_JAR_PATH
+          $APP_JAR_PATH = "../../app/app.jar"
+          cp target/*.jar $APP_JAR_PATH
 
      # - name: Build da imagem
      #   run: 
