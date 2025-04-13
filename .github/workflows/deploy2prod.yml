@@ -68,7 +68,7 @@ jobs:
       - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
-             cp target/*.jar app/app.jar
+             cp target/*.jar ../app/app.jar
 
      
       # - name: Realiza o release
