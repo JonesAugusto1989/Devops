@@ -79,7 +79,7 @@ jobs:
       
       - name:  docker login
         run: |
-           echo ${{secrets.DOCKER_TOKEN}} | docker login --username ${{secrets.DOCKERHUB_USER}} -- password-stdin
+           echo ${{secrets.DOCKER_TOKEN}} | docker login --username ${{secrets.DOCKERHUB_USERNAME}} -- password-stdin
       - name: docker push
         run: | 
              docker push JonesAugusto1989/CadastroCliente:latest
