@@ -72,7 +72,9 @@ jobs:
              cp target/*.jar $APP_JAR_PATH
 
       - name: Build da imagem
-        run: docker build . -f app/dockerfile -t CadastroCliente:4.0
+        run: |
+          ln -s ~/.docker/run/docker.sock /var/run/docker.sock
+          docker build . -f app/dockerfile -t CadastroCliente:4.0
           
       # - name: Realiza o release
        #  working-directory: ./workspace/CadastroCliente
