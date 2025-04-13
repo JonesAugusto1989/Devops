@@ -73,8 +73,7 @@ jobs:
 
       - name: Build da imagem
         run: |
-          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/app -w /app cadastrocliente:4.0 docker build . -f app/dockerfile -t cadastrocliente:4.0
-          
+          docker build . -f app/dockerfile -t CadastroCliente:4.0
           
       # - name: Realiza o release
        #  working-directory: ./workspace/CadastroCliente
