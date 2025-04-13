@@ -46,7 +46,7 @@ jobs:
      #   run: 
      #     docker build . -f app/dockerfile -t CadastroCliente:4.0
       - name: docker login
-        shell: bash
+        shell: 'C:\Program Files\Git\bin\bash.exe'
         run: |
               echo "${{ secrets.DOCKER_TOKEN }}" | docker login --username "${{ secrets.USER_NAME }}" --password-stdin
 
