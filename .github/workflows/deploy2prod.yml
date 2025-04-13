@@ -45,10 +45,12 @@ jobs:
      # - name: Build da imagem
      #   run: 
      #     docker build . -f app/dockerfile -t CadastroCliente:4.0
-      - name: docker login
-        shell: 'C:\Program Files\Git\bin\bash.exe'
+      - name: docker login (PowerShell)
+        shell: powershell
         run: |
-              echo "${{ secrets.DOCKER_TOKEN }}" | docker login --username "${{ secrets.USER_NAME }}" --password-stdin
+             $password = "${{ secrets.DOCKER_TOKEN }}"
+             docker login --username "${{ secrets.USER_NAME }}" --password $password
+
 
       - name: Criar tag
         run: docker tag CadastroCliente:3.0 JonesAugusto1989/CadastroCliente:3.0
