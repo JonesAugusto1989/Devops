@@ -73,7 +73,7 @@ jobs:
 
       - name: Build da imagem
         run: |
-          sudo systemctl start docker
+          sudo initctl start docker
           docker build . -f app/dockerfile -t CadastroCliente:4.0
           
       # - name: Realiza o release
