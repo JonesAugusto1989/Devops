@@ -7,36 +7,7 @@ jobs:
   build-and-deploy:
     runs-on: self-hosted
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: ConfigGit
-        run: |
-          git config user.name "[Bot]GitHubActions"
-          git config user.email "BotDevOps@teste.com"
-      - name: Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-      - name: Maven
-        uses: stCarolas/setup-maven@v5
-        with:
-          maven-version: '3.8.2'
-      - name: Exibir Envs
-        run: |
-          java -version
-          mvn -version
-      - name: Clean
-        run: mvn clean
-        working-directory: ./workspace/CadastroCliente
-      #- name: Executar testes
-      #  run: mvn test
-      #  working-directory: ./workspace/CadastroCliente
-      - name: Build
-        run: mvn package -DskipTests
-        working-directory: ./workspace/CadastroCliente
-     #- name: Check code version
-      # echo "nova versão é": ${{steps.increment-version.new_version}}
+      # ... (outras etapas) ...
 
       - name: Define a versão do projeto
         run: |
@@ -58,7 +29,7 @@ jobs:
 
       - name: confirmarVersao
         run: |
-               echo "A versão final é teste: " ${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT
+          echo "A versão final é teste: $($parsedVersion_majorVersion).$($parsedVersion_nextMinorVersion).0-SNAPSHOT"
      # - name: Commit do POM
       #  working-directory: ./workspace/CadastroCliente
        # run: |
