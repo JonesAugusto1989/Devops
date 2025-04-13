@@ -59,12 +59,12 @@ jobs:
       - name: confirmarVersao
         run: |
               echo "A versão final é teste: " ${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT
-      - name: Commit do POM
-        working-directory: ./workspace/CadastroCliente
-        run: |
-            git add pom.xml
-            git commit -m "Alterando a versão do projeto"
-            git push origin main
+     # - name: Commit do POM
+      #  working-directory: ./workspace/CadastroCliente
+       # run: |
+        #    git add pom.xml
+         #   git commit -m "Alterando a versão do projeto"
+          #  git push origin main
       - name: Jar Copy
         run: |
              cp target/*.jar docker/app.jar
