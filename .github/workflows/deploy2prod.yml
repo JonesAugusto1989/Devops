@@ -55,7 +55,7 @@ jobs:
       - name: Atualização de versão Major
         working-directory: ./workspace/CadastroCliente
         run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_nextMajorVersion}.${parsedVersion_minorVersion}.0-SNAPSHOT" versions:commit
-        
+
       - name: confirmarVersao
         run: |
               echo "A versão final é teste: " ${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT
@@ -65,6 +65,10 @@ jobs:
             git add pom.xml
             git commit -m "Alterando a versão do projeto"
             git push origin main
+      - name: Jar Copy
+        run: |
+             cp target/*.jar docker/app.jar
+
      
       # - name: Realiza o release
        #  working-directory: ./workspace/CadastroCliente
