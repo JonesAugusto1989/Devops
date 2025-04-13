@@ -45,8 +45,7 @@ jobs:
           Copy-Item target\*.jar -Destination $APP_JAR_PATH
 
       - name: Build da imagem
-        run: 
-            docker build -f app/dockerfile -t cadastrocliente:3.0 --no-cache
+        run: docker build app -f app/dockerfile -t cadastrocliente:3.0 --no-cache
 
       - name: docker login
         shell: powershell
