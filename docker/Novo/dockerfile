@@ -28,10 +28,11 @@ RUN apt-get install -y git
 
 # Install the GitHub Actions Runner 
 RUN apt-get update && apt-get install -y sudo jq
+RUN groupadd docker && \
+    useradd -m github && \
+    usermod -aG sudo,docker github && \
+    echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN useradd -m github && \
-  usermod -aG sudo github && \
-  echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER github
 WORKDIR /actions-runner
