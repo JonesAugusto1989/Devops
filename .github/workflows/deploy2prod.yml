@@ -29,14 +29,10 @@ jobs:
       - name: Clean
         run: mvn clean
         working-directory: ./workspace/CadastroCliente
-      #- name: Executar testes
-      #  run: mvn test
-      #  working-directory: ./workspace/CadastroCliente
+
       - name: Build
         run: mvn package -DskipTests
         working-directory: ./workspace/CadastroCliente
-     #- name: Check code version
-      # echo "nova versão é": ${{steps.increment-version.new_version}}
 
       - name: Define a versão do projeto
         run: |
@@ -59,12 +55,6 @@ jobs:
       - name: confirmarVersao
         run: |
           echo "A versão final é teste: $($parsedVersion_majorVersion).$($parsedVersion_nextMinorVersion).0-SNAPSHOT"
-     # - name: Commit do POM
-      #  working-directory: ./workspace/CadastroCliente
-       # run: |
-        #    git add pom.xml
-         #   git commit -m "Alterando a versão do projeto"
-          #   git push origin main
       - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
@@ -100,10 +90,3 @@ jobs:
 
       - name: Status do deploy
         run:  kubectl rollout status deploy cadastrocliente -n cliente
-      
-      
-      
-     # - name: Realiza o release
-      #  working-directory: ./workspace/CadastroCliente
-       # run: mvn --batch-mode release: clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
-
