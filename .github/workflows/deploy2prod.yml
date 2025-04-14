@@ -74,9 +74,13 @@ jobs:
           Copy-Item target\*.jar -Destination $APP_JAR_PATH
 
       - name: docker login
-        shell: bash
-        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.USER_NAME }}" --password-stdin
-
+        shell: powershell
+        run: |
+              $ErrorActionPreference = "Stop"
+              $username = "${{ secrets.USER_NAME }}"
+              $password = "${{ secrets.DOCKER_TOKEN }}"
+              docker logout
+              docker login -u $username -p $password
 
       - name: Build da imagem
         run:  docker build ./app -f app/dockerfile -t cadastrocliente:5.0 --no-cache
