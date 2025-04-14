@@ -90,12 +90,12 @@ jobs:
         shell: C:\Program Files\Git\bin\bash.exe
         run: |
             echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.USER_NAME }}" --password-stdin
+
       - name: docker push
         shell: C:\Program Files\Git\bin\bash.exe
         run: docker push jonesaugusto1989/cadastrocliente:3.0
 
-      - name: docker push
-        run: docker push jonesaugusto1989/cadastrocliente:3.0
+      
 
       - name: Criar tag latest
         run: docker tag cadastrocliente:3.0 jonesaugusto1989/cadastrocliente:latest
