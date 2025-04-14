@@ -76,8 +76,8 @@ jobs:
       - name: docker login
         shell: powershell
         run: |
-            $password = "${{ secrets.DOCKER_TOKEN }}"
-            docker login --username "${{ secrets.USER_NAME }}" --password $password
+             $password = "${{ secrets.DOCKER_TOKEN }}"
+             docker login --username "${{ secrets.USER_NAME }}" --password $password
 
 
       - name: Build da imagem
