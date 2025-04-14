@@ -64,7 +64,7 @@ jobs:
        # run: |
         #    git add pom.xml
          #   git commit -m "Alterando a versão do projeto"
-          #  git push origin main
+          #   git push origin main
       - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
