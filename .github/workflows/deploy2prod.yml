@@ -36,7 +36,7 @@ jobs:
         #    git add pom.xml
          #   git commit -m "Alterando a versão do projeto"
           #  git push origin main
-      - name: Jar Copy
+      - name: Copiando Jar
         working-directory: ./workspace/CadastroCliente/
         run: |
           $APP_JAR_PATH = "../../app/app.jar"
@@ -47,11 +47,9 @@ jobs:
       - name: Build da imagem
         run: docker build app -f app/dockerfile -t cadastrocliente:3.0 --no-cache
 
-      - name: docker login
-        shell: powershell
+      - name: Docker Login
         run: |
-              $password = "${{ secrets.DOCKER_TOKEN }}"
-              docker login --username "${{ secrets.USER_NAME }}" --password $password
+           echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.USER_NAME }}" --password-stdin
 
 
       - name: Criar tag
