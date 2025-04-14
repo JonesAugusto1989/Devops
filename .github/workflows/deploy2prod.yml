@@ -87,10 +87,9 @@ jobs:
         run: docker tag cadastrocliente:3.0 jonesaugusto1989/cadastrocliente:3.0
 
       - name: docker login
-        shell: powershell
+        shell: C:\Program Files\Git\bin\bash.exe
         run: |
-            $password = "${{ secrets.DOCKER_TOKEN }}"
-            docker login --username "${{ secrets.USER_NAME }}" --password $password && docker push jonesaugusto1989/cadastrocliente:3.0
+            echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.USER_NAME }}" --password-stdin && docker push jonesaugusto1989/cadastrocliente:3.0
 
       - name: docker push
         run: docker push jonesaugusto1989/cadastrocliente:3.0
