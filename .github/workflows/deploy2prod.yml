@@ -84,16 +84,16 @@ jobs:
         run: docker build ./app -f app/dockerfile -t cadastrocliente:5.0 --no-cache
 
       - name: Criar tag
-        run: docker tag cadastrocliente:5.0 jonesaugusto/cadastrocliente:5.0
+        run: docker tag cadastrocliente:5.0 jonesparanhos/cadastrocliente:5.0
 
       - name: docker push
-        run: docker push jonesaugusto/cadastrocliente:5.0
+        run: docker push jonesparanhos/cadastrocliente:5.0
 
       - name: Criar tag latest
-        run: docker tag cadastrocliente:5.0 jonesaugusto/cadastrocliente:latest
+        run: docker tag cadastrocliente:5.0 jonesparanhos/cadastrocliente:latest
 
       - name: docker push latest
-        run: docker push  jonesaugusto/cadastrocliente:latest
+        run: docker push  jonesparanhos/cadastrocliente:latest
       # - name: Realiza o release
        #  working-directory: ./workspace/CadastroCliente
        #  run: mvn --batch-mode release: clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
