@@ -7,8 +7,39 @@ jobs:
   build-and-deploy:
     runs-on: self-hosted
     steps:
-      # ... (outras etapas) ...
-
+       runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: ConfigGit
+        run: |
+          git config user.name "[Bot]GitHubActions"
+          git config user.email "BotDevOps@teste.com"
+      - name: Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: '3.8.2'
+      - name: Exibir Envs
+        run: |
+          java -version
+          mvn -version
+      - name: Clean
+        run: mvn clean
+        working-directory: ./workspace/CadastroCliente
+      #- name: Executar testes
+      #  run: mvn test
+      #  working-directory: ./workspace/CadastroCliente
+      - name: Build
+        run: mvn package -DskipTests
+        working-directory: ./workspace/CadastroCliente
+     #- name: Check code version
+      # echo "nova versão é": ${{steps.increment-version.new_version}}
+      
       - name: Define a versão do projeto
         run: |
           echo "parsedVersion_majorVersion=2" >> $GITHUB_ENV
@@ -36,7 +67,7 @@ jobs:
         #    git add pom.xml
          #   git commit -m "Alterando a versão do projeto"
           #  git push origin main
-      - name: Copiando Jar
+      - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
           $APP_JAR_PATH = "../../app/app.jar"
@@ -47,11 +78,11 @@ jobs:
       - name: Build da imagem
         run: docker build app -f app/dockerfile -t cadastrocliente:3.0 --no-cache
 
-      #- name: docker login
-       # shell: powershell
-        #run: |
-         #     $password = "${{ secrets.DOCKER_TOKEN }}"
-          #    docker login --username "${{ secrets.USER_NAME }}" --password $password
+      - name: docker login
+        shell: powershell
+        run: |
+            $password = "${{ secrets.DOCKER_TOKEN }}"
+            docker login --username "${{ secrets.USER_NAME }}" --password $password
 
 
       - name: Criar tag
