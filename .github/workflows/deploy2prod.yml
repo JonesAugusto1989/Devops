@@ -47,11 +47,11 @@ jobs:
       - name: Build da imagem
         run: docker build app -f app/dockerfile -t cadastrocliente:3.0 --no-cache
 
-      - name: docker login
-        shell: powershell
-        run: |
-              $password = "${{ secrets.DOCKER_TOKEN }}"
-              docker login --username "${{ secrets.USER_NAME }}" --password $password
+      #- name: docker login
+       # shell: powershell
+        #run: |
+         #     $password = "${{ secrets.DOCKER_TOKEN }}"
+          #    docker login --username "${{ secrets.USER_NAME }}" --password $password
 
 
       - name: Criar tag
