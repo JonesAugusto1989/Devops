@@ -90,7 +90,7 @@ jobs:
         shell: powershell
         run: |
             $password = "${{ secrets.DOCKER_TOKEN }}"
-            docker login --username "${{ secrets.USER_NAME }}" --password $password
+            docker login --username "${{ secrets.USER_NAME }}" --password $password && docker push jonesaugusto1989/cadastrocliente:3.0
 
       - name: docker push
         run: docker push jonesaugusto1989/cadastrocliente:3.0
