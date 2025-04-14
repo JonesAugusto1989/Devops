@@ -73,15 +73,17 @@ jobs:
           Write-Host "Copiando o arquivo JAR: $JAR_FILE para $APP_JAR_PATH"
           Copy-Item target\*.jar -Destination $APP_JAR_PATH
 
-      - name: Build da imagem
-        run: docker build app -f app/dockerfile -t cadastrocliente:3.0 --no-cache
-
       - name: docker login
         shell: powershell
         run: |
             $password = "${{ secrets.DOCKER_TOKEN }}"
             docker login --username "${{ secrets.USER_NAME }}" --password $password
 
+
+      - name: Build da imagem
+        run: docker build app -f app/dockerfile -t cadastrocliente:3.0 --no-cache
+
+     
 
       - name: Criar tag
         run: docker tag cadastrocliente:3.0 jonesaugusto1989/cadastrocliente:3.0
