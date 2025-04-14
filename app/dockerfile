@@ -1,5 +1,5 @@
 FROM openjdk:latest
 WORKDIR /app
-COPY ./app/*.jar cadastrocliente.jar
+COPY *.jar cadastrocliente.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "cadastrocliente.jar"]
