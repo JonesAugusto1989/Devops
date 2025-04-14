@@ -94,7 +94,16 @@ jobs:
 
       - name: docker push latest
         run: docker push  jonesparanhos/cadastrocliente:latest
-      # - name: Realiza o release
-       #  working-directory: ./workspace/CadastroCliente
-       #  run: mvn --batch-mode release: clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
+      
+      - name: Atualizando K8s
+        run: kubectl rollout deploy cadastrocliente -n cliente
+
+      - name: Status do deploy
+        run:  kubectl rollout status deploy cadastrocliente -n cliente
+      
+      
+      
+     # - name: Realiza o release
+      #  working-directory: ./workspace/CadastroCliente
+       # run: mvn --batch-mode release: clean release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true -Dmaven.test.skipTests=true -Dmaven.test.skip=true" -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
 
