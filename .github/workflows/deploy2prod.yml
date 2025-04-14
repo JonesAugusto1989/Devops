@@ -80,16 +80,16 @@ jobs:
             docker login --username "${{ secrets.USER_NAME }}" --password $password
 
       - name: Build da imagem
-        run:  docker build ./app -f app/dockerfile -t cadastrocliente:4.0 --no-cache
+        run:  docker build ./app -f app/dockerfile -t cadastrocliente:5.0 --no-cache
 
       - name: Criar tag
-        run: docker tag cadastrocliente:4.0 jonesaugusto1989/cadastrocliente:4.0
+        run: docker tag cadastrocliente:5.0 jonesaugusto1989/cadastrocliente:5.0
 
       - name: docker push
-        run: docker push jonesaugusto1989/cadastrocliente:4.0
+        run: docker push jonesaugusto1989/cadastrocliente:5.0
 
       - name: Criar tag latest
-        run: docker tag cadastrocliente:4.0 jonesaugusto1989/cadastrocliente:latest
+        run: docker tag cadastrocliente:5.0 jonesaugusto1989/cadastrocliente:latest
 
       - name: docker push latest
         run: docker push jonesaugusto1989/cadastrocliente:latest
