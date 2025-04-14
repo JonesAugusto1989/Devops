@@ -81,8 +81,7 @@ jobs:
 
 
       - name: Build da imagem
-        working-directory: ./workspace/CadastroCliente
-        run: docker build app -f app/dockerfile -t cadastrocliente:3.0 --no-cache
+        run: docker build ./app -f app/dockerfile -t cadastrocliente:3.0 --no-cache
 
      
 
