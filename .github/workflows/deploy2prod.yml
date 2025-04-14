@@ -96,7 +96,7 @@ jobs:
         run: docker push  jonesparanhos/cadastrocliente:latest
       
       - name: Atualizando K8s
-        run: kubectl rollout deploy cadastrocliente -n cliente
+        run: kubectl rollout restart deploy cadastrocliente -n cliente
 
       - name: Status do deploy
         run:  kubectl rollout status deploy cadastrocliente -n cliente
