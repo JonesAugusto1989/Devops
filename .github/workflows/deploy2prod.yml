@@ -74,12 +74,14 @@ jobs:
              $password = "${{ secrets.DOCKER_TOKEN }}"
              docker login --username "${{ secrets.USER_NAME }}" --password $password
       - name: Versão final
+        shell: powershell
         run: |
            echo "project_version=$env:parsedVersion_majorVersion.$env:parsedVersion_nextMinorVersion" >> $env:GITHUB_ENV
 
 
 
       - name: Build da imagem
+        shell: powershell
         run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.project_version }} --no-cache
 
       - name: Criar tag
