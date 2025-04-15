@@ -42,17 +42,17 @@ jobs:
       - name: Define a versão do projeto
         shell: powershell
         run: |
-          $env:PARSED_MAJOR = "2"
-          $env:PARSED_MINOR = "5"
-          $env:PROJECT_VERSION = "$env:PARSED_MAJOR.$env:PARSED_MINOR"
-          echo "PARSED_MAJOR=$env:PARSED_MAJOR" >> "$env:GITHUB_ENV"
-          echo "PARSED_MINOR=$env:PARSED_MINOR" >> "$env:GITHUB_ENV"
-          echo "PROJECT_VERSION=$env:PROJECT_VERSION" >> "$env:GITHUB_ENV"
+          $env:MAJOR = "2"
+          $env:MINOR = "5"
+          $env:PVERSION = "$env:MAJOR.$env:MINOR"
+          echo "MAJOR=$env:MAJOR" >> "$env:GITHUB_ENV"
+          echo "MINOR=$env:MINOR" >> "$env:GITHUB_ENV"
+          echo "PVERSION=$env:P_VERSION" >> "$env:GITHUB_ENV"
 
       - name: Mostrar alteração a ser efetuada.
         run: |
-          echo "PARSED_MAJOR=${{ env.PARSED_MAJOR }}"
-          echo "PARSED_MINOR=${{ env.PARSED_MINOR }}"
+          echo "MAJOR=${{ env.MAJOR }}"
+          echo "MINOR=${{ env.MINOR }}"
 
       - name: Atualização de versão Minor
         working-directory: ./workspace/CadastroCliente/
@@ -81,16 +81,16 @@ jobs:
 
 
       - name: Build da imagem
-        run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PROJECT_VERSION }} --no-cache
+        run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PVERSION }} --no-cache
 
       - name: Criar tag
-        run: docker tag cadastrocliente:${{ env.PROJECT_VERSION }} jonesparanhos/cadastrocliente:${{ env.PROJECT_VERSION }}
+        run: docker tag cadastrocliente:${{ env.PVERSION }} jonesparanhos/cadastrocliente:${{ env.PVERSION }}
 
       - name: docker push
-        run: docker push jonesparanhos/cadastrocliente:${{ env.PROJECT_VERSION }}
+        run: docker push jonesparanhos/cadastrocliente:${{ env.PVERSION }}
 
       - name: Criar tag latest
-        run: docker tag cadastrocliente:${{ env.PROJECT_VERSION }} jonesparanhos/cadastrocliente:latest
+        run: docker tag cadastrocliente:${{ env.PVERSION }} jonesparanhos/cadastrocliente:latest
 
       - name: docker push latest
         run: docker push  jonesparanhos/cadastrocliente:latest
