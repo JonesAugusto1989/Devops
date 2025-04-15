@@ -41,8 +41,8 @@ jobs:
 
       - name: Define a versão do projeto
         run: |
-          echo "parsedVersion_majorVersion=2" >> $GITHUB_ENV
-          echo "parsedVersion_nextMinorVersion=5" >> $GITHUB_ENV
+           echo "parsedVersion_majorVersion=2" >> $GITHUB_ENV
+           echo "parsedVersion_nextMinorVersion=5" >> $GITHUB_ENV
 
       - name: Mostrar alteração a ser efetuada.
         run: |
