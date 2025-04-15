@@ -60,7 +60,7 @@ jobs:
       - name: confirmarVersao
         run: |
           echo "A versão final é teste: $($parsedVersion_majorVersion).$($parsedVersion_nextMinorVersion).0-SNAPSHOT"
-          
+
       - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
@@ -76,14 +76,14 @@ jobs:
              docker login --username "${{ secrets.USER_NAME }}" --password $password
 
       - name: Versão final
-        shell: powershell
+        shell: bash
         run: |
             echo "project_version=${{ env.parsedVersion_majorVersion }}.${{ env.parsedVersion_nextMinorVersion }}" >> $GITHUB_ENV
 
 
 
       - name: Build da imagem
-        shell: powershell
+        shell: bash
         run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.project_version }} --no-cache
 
       - name: Criar tag
