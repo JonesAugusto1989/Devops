@@ -41,15 +41,14 @@ jobs:
 
       - name: Define a versão do projeto
         run: |
-           echo "parsedVersion_majorVersion=2" >> $GITHUB_ENV
-           echo "parsedVersion_nextMinorVersion=5" >> $GITHUB_ENV
-            echo "PROJECT_VERSION=${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}" >> $GITHUB_ENV
+          echo "PARSED_MAJOR=2" >> $GITHUB_ENV
+          echo "PARSED_MINOR=5" >> $GITHUB_ENV
+          echo "PROJECT_VERSION=${{ env.PARSED_MAJOR }}.${{ env.PARSED_MINOR }}" >> $GITHUB_ENV
 
       - name: Mostrar alteração a ser efetuada.
         run: |
-          echo "parsedVersion_majorVersion=$parsedVersion_majorVersion"
-          echo "parsedVersion_nextMinorVersion=$parsedVersion_nextMinorVersion"
-          echo "PROJECT_VERSION=${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}" >> $GITHUB_ENV
+          echo "PARSED_MAJOR=${{ env.PARSED_MAJOR }}"
+          echo "PARSED_MINOR=${{ env.PARSED_MINOR }}"
 
       - name: Atualização de versão Minor
         working-directory: ./workspace/CadastroCliente/
