@@ -4,14 +4,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.edu.infnet.CadastroCliente.Controller.ClienteController;
 import br.edu.infnet.CadastroCliente.Model.Cliente;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
+import org.mockito.*;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 @SpringBootTest
 @ActiveProfiles("test")
+
 class CadastroClienteApplicationTests {
 
 	@Test
@@ -20,10 +27,9 @@ class CadastroClienteApplicationTests {
 	
 	@Autowired
     private ClienteController clienteController;
+	private HttpSession session;
 	private HttpServletRequest request;
-   
-
-
+	
     private Cliente cliente1;
     private Cliente cliente2;
 
@@ -48,6 +54,11 @@ class CadastroClienteApplicationTests {
     
     @Test
     void incluirCliente() {
+    	request = mock(HttpServletRequest.class); 
+        session = mock(HttpSession.class);
+    	when(request.getSession()).thenReturn(session);
+    	when(request.getSession(true)).thenReturn(session);
+    	
     	clienteController.incluirCliente(request, cliente1);
     	clienteController.incluirCliente(request, cliente2);
     }
