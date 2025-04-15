@@ -60,7 +60,6 @@ jobs:
       - name: confirmarVersao
         run: |
           echo "A versão final é teste: $($parsedVersion_majorVersion).$($parsedVersion_nextMinorVersion).0-SNAPSHOT"
-
       - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
@@ -75,27 +74,18 @@ jobs:
              $password = "${{ secrets.DOCKER_TOKEN }}"
              docker login --username "${{ secrets.USER_NAME }}" --password $password
 
-      - name: Versão final
-        shell: powershell
-        run: |
-            $project_version = "$env:parsedVersion_majorVersion.$env:parsedVersion_nextMinorVersion"
-            echo "project_version=$project_version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-            Write-Host "Versão definida: $project_version"
-
-
 
       - name: Build da imagem
-        shell: powershell
-        run: docker build ./app -f app/dockerfile -t cadastrocliente:${env:project_version} --no-cache
+        run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PROJECT_VERSION }} --no-cache
 
       - name: Criar tag
-        run: docker tag cadastrocliente:${{ env.project_version }} jonesparanhos/cadastrocliente:${{ env.project_version }}
+        run: docker tag cadastrocliente:${{ env.PROJECT_VERSION }} jonesparanhos/cadastrocliente:${{ env.PROJECT_VERSION }}
 
       - name: docker push
-        run: docker push jonesparanhos/cadastrocliente:${{ env.project_version }}
+        run: docker push jonesparanhos/cadastrocliente:${{ env.PROJECT_VERSION }}
 
       - name: Criar tag latest
-        run: docker tag cadastrocliente:${{ env.project_version }} jonesparanhos/cadastrocliente:latest
+        run: docker tag cadastrocliente:${{ env.PROJECT_VERSION }} jonesparanhos/cadastrocliente:latest
 
       - name: docker push latest
         run: docker push  jonesparanhos/cadastrocliente:latest
