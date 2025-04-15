@@ -75,7 +75,7 @@ jobs:
              docker login --username "${{ secrets.USER_NAME }}" --password $password
       - name: Versão final
         run: |
-            echo "project_version=$parsedVersion_majorVersion.$parsedVersion_nextMinorVersion" >> $GITHUB_ENV
+           echo "project_version=$env:parsedVersion_majorVersion.$env:parsedVersion_nextMinorVersion" >> $env:GITHUB_ENV
 
 
 
