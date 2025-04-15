@@ -43,6 +43,7 @@ jobs:
         run: |
            echo "parsedVersion_majorVersion=2" >> $GITHUB_ENV
            echo "parsedVersion_nextMinorVersion=5" >> $GITHUB_ENV
+            echo "PROJECT_VERSION=${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}" >> $GITHUB_ENV
 
       - name: Mostrar alteração a ser efetuada.
         run: |
