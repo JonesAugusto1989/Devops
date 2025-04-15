@@ -45,9 +45,9 @@ jobs:
           $env:PARSED_MAJOR = "2"
           $env:PARSED_MINOR = "5"
           $env:PROJECT_VERSION = "$env:PARSED_MAJOR.$env:PARSED_MINOR"
-          Write-Output "PARSED_MAJOR=$env:PARSED_MAJOR" >> "$env:GITHUB_ENV"
-          Write-Output "PARSED_MINOR=$env:PARSED_MINOR" >> "$env:GITHUB_ENV"
-          Write-Output "PROJECT_VERSION=$env:PROJECT_VERSION" >> "$env:GITHUB_ENV"
+          echo "PARSED_MAJOR=$env:PARSED_MAJOR" >> "$env:GITHUB_ENV"
+          echo "PARSED_MINOR=$env:PARSED_MINOR" >> "$env:GITHUB_ENV"
+          echo "PROJECT_VERSION=$env:PROJECT_VERSION" >> "$env:GITHUB_ENV"
 
       - name: Mostrar alteração a ser efetuada.
         run: |
