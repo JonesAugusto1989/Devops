@@ -29,6 +29,9 @@ jobs:
       - name: Clean
         run: mvn clean
         working-directory: ./workspace/CadastroCliente
+        
+      - name: Executar testes
+        run: mvn test
 
       - name: Build
         run: mvn package -DskipTests
