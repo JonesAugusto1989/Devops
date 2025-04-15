@@ -82,16 +82,16 @@ jobs:
 
       - name: Build da imagem
         shell: powershell
-        run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.project_version }} --no-cache
+        run: docker build ./app -f app/dockerfile -t cadastrocliente:$env:project_version --no-cache
 
       - name: Criar tag
-        run: docker tag cadastrocliente:${{ env.project_version }} jonesparanhos/cadastrocliente:${{ env.project_version }}
+        run: docker tag cadastrocliente:$env:project_version jonesparanhos/cadastrocliente:$env:project_version
 
       - name: docker push
-        run: docker push jonesparanhos/cadastrocliente:${{ env.project_version }}
+        run: docker push jonesparanhos/cadastrocliente:$env:project_version
 
       - name: Criar tag latest
-        run: docker tag cadastrocliente:${{ env.project_version }} jonesparanhos/cadastrocliente:latest
+        run: docker tag cadastrocliente:$env:project_version jonesparanhos/cadastrocliente:latest
 
       - name: docker push latest
         run: docker push  jonesparanhos/cadastrocliente:latest
