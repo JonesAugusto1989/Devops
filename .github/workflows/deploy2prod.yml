@@ -26,11 +26,13 @@ jobs:
         run: |
           java -version
           mvn -version
+    
       - name: Clean
         run: mvn clean
         working-directory: ./workspace/CadastroCliente
-        
+
       - name: Executar testes
+        working-directory: ./workspace/CadastroCliente
         run: mvn test
 
       - name: Build
