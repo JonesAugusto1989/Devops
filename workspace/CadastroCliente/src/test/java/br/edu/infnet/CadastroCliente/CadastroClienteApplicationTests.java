@@ -4,14 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ActiveProfiles;
-
 import br.edu.infnet.CadastroCliente.Controller.ClienteController;
 import br.edu.infnet.CadastroCliente.Model.Cliente;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 import org.mockito.*;
 
 import static org.mockito.Mockito.mock;

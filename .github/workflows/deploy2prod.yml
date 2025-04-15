@@ -73,19 +73,21 @@ jobs:
         run: |
              $password = "${{ secrets.DOCKER_TOKEN }}"
              docker login --username "${{ secrets.USER_NAME }}" --password $password
+      - name: Versão final
+        run: echo "project_version=${{ env.parsedVersion_majorVersion }}.${{ env.parsedVersion_nextMinorVersion }}" >> $GITHUB_ENV
 
 
       - name: Build da imagem
-        run: docker build ./app -f app/dockerfile -t cadastrocliente:5.0 --no-cache
+        run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.project_version }} --no-cache
 
       - name: Criar tag
-        run: docker tag cadastrocliente:5.0 jonesparanhos/cadastrocliente:5.0
+        run: docker tag cadastrocliente:${{ env.project_version }} jonesparanhos/cadastrocliente:${{ env.project_version }}
 
       - name: docker push
-        run: docker push jonesparanhos/cadastrocliente:5.0
+        run: docker push jonesparanhos/cadastrocliente:${{ env.project_version }}
 
       - name: Criar tag latest
-        run: docker tag cadastrocliente:5.0 jonesparanhos/cadastrocliente:latest
+        run: docker tag cadastrocliente:${{ env.project_version }} jonesparanhos/cadastrocliente:latest
 
       - name: docker push latest
         run: docker push  jonesparanhos/cadastrocliente:latest
