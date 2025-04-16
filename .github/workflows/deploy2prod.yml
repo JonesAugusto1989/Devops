@@ -56,7 +56,8 @@ jobs:
 
       - name: Atualizar versão do POM
         working-directory: ./workspace/CadastroCliente
-        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion=${MAJOR}.${MINOR}.0-SNAPSHOT versions:commit
+        shell: powershell
+        run:  mvn --batch-mode build-helper:parse-version versions:set "-DnewVersion=$env:MAJOR.$env:MINOR.0-SNAPSHOT" versions:commit
       
       - name: confirmarVersao
         run: |
