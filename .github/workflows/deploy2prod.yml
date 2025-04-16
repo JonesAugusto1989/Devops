@@ -81,16 +81,16 @@ jobs:
 
 
       - name: Build da imagem
-        run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PVERSION }} --no-cache
+        run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.P_VERSION }} --no-cache
 
       - name: Criar tag
-        run: docker tag cadastrocliente:${{ env.PVERSION }} jonesparanhos/cadastrocliente:${{ env.PVERSION }}
+        run: docker tag cadastrocliente:${{ env.P_VERSION }} jonesparanhos/cadastrocliente:${{ env.P_VERSION }}
 
       - name: docker push
-        run: docker push jonesparanhos/cadastrocliente:${{ env.PVERSION }}
+        run: docker push jonesparanhos/cadastrocliente:${{ env.P_VERSION }}
 
       - name: Criar tag latest
-        run: docker tag cadastrocliente:${{ env.PVERSION }} jonesparanhos/cadastrocliente:latest
+        run: docker tag cadastrocliente:${{ env.P_VERSION }} jonesparanhos/cadastrocliente:latest
 
       - name: docker push latest
         run: docker push  jonesparanhos/cadastrocliente:latest
