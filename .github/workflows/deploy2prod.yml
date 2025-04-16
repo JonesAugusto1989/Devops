@@ -84,8 +84,7 @@ jobs:
       - name: Push changes to GitHub
         working-directory: ./workspace/CadastroCliente
         run: |
-          git remote add origin "https://JonesAugusto1989/:${{ secrets.GITHUB_TOKEN }}@github.com/Devops"
-          git push origin ${{ github.head_ref || github.ref_name }}
+          git push pom.xml
 
       - name: Build da imagem
         run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PVERSION }} --no-cache
