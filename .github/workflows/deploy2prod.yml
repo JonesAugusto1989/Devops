@@ -42,8 +42,8 @@ jobs:
       - name: Define a versão do projeto
         shell: powershell
         run: |
-          $env:MAJOR = "3"
-          $env:MINOR = "0"
+          $env:MAJOR = "6"
+          $env:MINOR = "5"
           $env:PVERSION = "$env:MAJOR.$env:MINOR"
           echo "MAJOR=$env:MAJOR" >> "$env:GITHUB_ENV"
           echo "MINOR=$env:MINOR" >> "$env:GITHUB_ENV"
@@ -62,7 +62,7 @@ jobs:
       - name: confirmarVersao
         run: |
           echo "A versão final é teste: $($MAJOR).$($MINOR).0-SNAPSHOT"
-          
+
       - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
