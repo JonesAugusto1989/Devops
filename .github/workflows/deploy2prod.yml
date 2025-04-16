@@ -56,15 +56,15 @@ jobs:
 
       - name: Atualização de versão Minor
         working-directory: ./workspace/CadastroCliente/
-        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_majorVersion}.${parsedVersion_nextMinorVersion}.0-SNAPSHOT" versions:commit
+        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${MAJOR}.${MINOR}.0-SNAPSHOT" versions:commit
 
       - name: Atualização de versão Major
         working-directory: ./workspace/CadastroCliente
-        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${parsedVersion_nextMajorVersion}.${parsedVersion_minorVersion}.0-SNAPSHOT" versions:commit
+        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${MAJOR}.${MINOR}.0-SNAPSHOT" versions:commit
 
       - name: confirmarVersao
         run: |
-          echo "A versão final é teste: $($parsedVersion_majorVersion).$($parsedVersion_nextMinorVersion).0-SNAPSHOT"
+          echo "A versão final é teste: $($MAJOR).$($MINOR).0-SNAPSHOT"
       - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
