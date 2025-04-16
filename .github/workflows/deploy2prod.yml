@@ -76,11 +76,16 @@ jobs:
         run: |
              $password = "${{ secrets.DOCKER_TOKEN }}"
              docker login --username "${{ secrets.USER_NAME }}" --password $password
+
       - name: commit do pom
         working-directory: ./workspace/CadastroCliente
         run: |
           git add pom.xml
           git commit -m "Atualização da versão do POM: ${{ env.MAJOR }}.${{ env.MINOR }}.0-SNAPSHOT"
+          
+      - name: Build da imagem
+        run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PVERSION }} --no-cache
+
       - name: Criar tag
         run: docker tag cadastrocliente:${{ env.PVERSION }} jonesparanhos/cadastrocliente:${{ env.PVERSION }}
 
