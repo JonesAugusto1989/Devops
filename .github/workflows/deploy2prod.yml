@@ -81,11 +81,11 @@ jobs:
           git add pom.xml
           git commit -m "Atualizar versão do POM para ${{ env.MAJOR }}.${{ env.MINOR }}.0-SNAPSHOT"
 
-      - name: Git Push
-        uses: ad-m/github-push@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref_name }}
+      - name: Push changes to GitHub
+        working-directory: ./workspace/CadastroCliente
+        run: |
+          git remote add origin "https://JonesAugusto1989/:${{ secrets.GITHUB_TOKEN }}@github.com/Devops"
+          git push origin ${{ github.head_ref || github.ref_name }}
 
       - name: Build da imagem
         run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PVERSION }} --no-cache
