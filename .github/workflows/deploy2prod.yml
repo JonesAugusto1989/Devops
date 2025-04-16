@@ -62,6 +62,7 @@ jobs:
       - name: confirmarVersao
         run: |
           echo "A versão final é teste: $($MAJOR).$($MINOR).0-SNAPSHOT"
+          
       - name: Jar Copy
         working-directory: ./workspace/CadastroCliente/
         run: |
@@ -79,18 +80,7 @@ jobs:
         working-directory: ./workspace/CadastroCliente
         run: |
           git add pom.xml
-          git commit -m "Atualizar versão do POM para ${{ env.MAJOR }}.${{ env.MINOR }}.0-SNAPSHOT"
-
-      - name: Push changes to GitHub
-        working-directory: ./workspace/CadastroCliente
-        run: |
-          git add .
-      - name: git push
-        run: |
-          git push
-      - name: Build da imagem
-        run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PVERSION }} --no-cache
-
+          git commit -m "Atualização da versão do POM: ${{ env.MAJOR }}.${{ env.MINOR }}.0-SNAPSHOT"
       - name: Criar tag
         run: docker tag cadastrocliente:${{ env.PVERSION }} jonesparanhos/cadastrocliente:${{ env.PVERSION }}
 
