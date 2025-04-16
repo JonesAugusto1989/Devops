@@ -47,7 +47,7 @@ jobs:
           $env:PVERSION = "$env:MAJOR.$env:MINOR"
           echo "MAJOR=$env:MAJOR" >> "$env:GITHUB_ENV"
           echo "MINOR=$env:MINOR" >> "$env:GITHUB_ENV"
-          echo "PVERSION=$env:P_VERSION" >> "$env:GITHUB_ENV"
+          echo "PVERSION=$env:PVERSION" >> "$env:GITHUB_ENV"
 
       - name: Mostrar alteração a ser efetuada.
         run: |
