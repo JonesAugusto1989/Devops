@@ -84,8 +84,10 @@ jobs:
       - name: Push changes to GitHub
         working-directory: ./workspace/CadastroCliente
         run: |
-          git push pom.xml
-
+          git add .
+      - name: git push
+        run: |
+          git push
       - name: Build da imagem
         run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PVERSION }} --no-cache
 
