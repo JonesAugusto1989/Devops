@@ -54,18 +54,10 @@ jobs:
           echo "MAJOR=${{ env.MAJOR }}"
           echo "MINOR=${{ env.MINOR }}"
 
-      - name: Atualizar versão no POM
+      - name: Atualizar versão do POM
         working-directory: ./workspace/CadastroCliente
-        run: |
-          if [[ "$RUNNER_OS" == "Linux" || "$RUNNER_OS" == "macOS" ]]; then
-            sed -i "s/<version>.*<\/version>/<version>${{ env.MAJOR }}.${{ env.MINOR }}.0-SNAPSHOT<\/version>/g" pom.xml
-          elif [[ "$RUNNER_OS" == "Windows" ]]; then
-            $pomPath = Join-Path $PWD "pom.xml"
-            (Get-Content $pomPath) | ForEach-Object {
-              $_ -replace '<version>.*<\/version>', "<version>${{ env.MAJOR }}.${{ env.MINOR }}.0-SNAPSHOT</version>"
-            } | Set-Content $pomPath
-          fi
-        
+        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion=${MAJOR}.${MINOR}.0-SNAPSHOT versions:commit
+      
       - name: confirmarVersao
         run: |
           echo "A versão final é teste: $($MAJOR).$($MINOR).0-SNAPSHOT"
