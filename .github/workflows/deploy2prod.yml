@@ -75,7 +75,16 @@ jobs:
         run: |
              $password = "${{ secrets.DOCKER_TOKEN }}"
              docker login --username "${{ secrets.USER_NAME }}" --password $password
+      - name: commit do pom
+        working-directory: ./workspace/CadastroCliente
+        run: |
+          git add pom.xml
+          git commit -m "Atualizar versão do POM para ${{ env.MAJOR }}.${{ env.MINOR }}.0-SNAPSHOT"
 
+      - name: Git push
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          
 
       - name: Build da imagem
         run: docker build ./app -f app/dockerfile -t cadastrocliente:${{ env.PVERSION }} --no-cache
