@@ -56,8 +56,8 @@ jobs:
 
       - name: Atualizar versão do POM
         working-directory: ./workspace/CadastroCliente
-        run: mvn versions:set "-DnewVersion=${project.majorVersion}.${project.minorVersion}.0-SNAPSHOT" -DgenerateBackupPoms=false -B "-Dproject.majorVersion=${{ env.MAJOR }}" "-Dproject.minorVersion=${{ env.MINOR }}"
-      
+        run: mvn versions:set -DnewVersion="${project.majorVersion}.${project.minorVersion}.0-SNAPSHOT" -DgenerateBackupPoms=false -B
+        
       - name: confirmarVersao
         run: |
           echo "A versão final é teste: $($MAJOR).$($MINOR).0-SNAPSHOT"
