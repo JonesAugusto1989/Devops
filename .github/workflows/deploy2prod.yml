@@ -42,8 +42,8 @@ jobs:
       - name: Define a versão do projeto
         shell: powershell
         run: |
-          $env:MAJOR = "2"
-          $env:MINOR = "5"
+          $env:MAJOR = "3"
+          $env:MINOR = "0"
           $env:PVERSION = "$env:MAJOR.$env:MINOR"
           echo "MAJOR=$env:MAJOR" >> "$env:GITHUB_ENV"
           echo "MINOR=$env:MINOR" >> "$env:GITHUB_ENV"
