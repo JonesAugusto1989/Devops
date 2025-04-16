@@ -54,7 +54,7 @@ jobs:
           echo "MAJOR=${{ env.MAJOR }}"
           echo "MINOR=${{ env.MINOR }}"
 
-     - name: Atualizar versão no POM
+      - name: Atualizar versão no POM
         working-directory: ./workspace/CadastroCliente
         run: |
           if [[ "$RUNNER_OS" == "Linux" || "$RUNNER_OS" == "macOS" ]]; then
