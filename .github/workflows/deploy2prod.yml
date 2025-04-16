@@ -35,7 +35,7 @@ jobs:
         run: mvn package -DskipTests
         working-directory: ./workspace/CadastroCliente
 
-      - name: Define a versão do projeto
+      - name: Escolhe a versão do projeto
         shell: powershell
         run: |
           $env:MAJOR = "6"
@@ -44,11 +44,6 @@ jobs:
           echo "MAJOR=$env:MAJOR" >> "$env:GITHUB_ENV"
           echo "MINOR=$env:MINOR" >> "$env:GITHUB_ENV"
           echo "PVERSION=$env:PVERSION" >> "$env:GITHUB_ENV"
-
-      - name: Mostrar alteração a ser efetuada.
-        run: |
-          echo "MAJOR=${{ env.MAJOR }}"
-          echo "MINOR=${{ env.MINOR }}"
 
       - name: Atualizar versão do POM
         working-directory: ./workspace/CadastroCliente
