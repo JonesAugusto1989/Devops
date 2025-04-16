@@ -54,13 +54,12 @@ jobs:
           echo "MAJOR=${{ env.MAJOR }}"
           echo "MINOR=${{ env.MINOR }}"
 
-      - name: Atualização de versão Minor
-        working-directory: ./workspace/CadastroCliente/
-        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${MAJOR}.${MINOR}.0-SNAPSHOT" versions:commit
-
-      - name: Atualização de versão Major
+      - name: Atualizar versão do POM
         working-directory: ./workspace/CadastroCliente
-        run: mvn --batch-mode build-helper:parse-version versions:set -DnewVersion="${MAJOR}.${MINOR}.0-SNAPSHOT" versions:commit
+        run: mvn versions:set -DnewVersion="${project.majorVersion}.${project.minorVersion}.0-SNAPSHOT" -DgenerateBackupPoms=false -B
+        env:
+          project.majorVersion: ${{ env.MAJOR }}
+          project.minorVersion: ${{ env.MINOR }}
 
       - name: confirmarVersao
         run: |

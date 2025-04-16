@@ -29,6 +29,8 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2024.0.1</spring-cloud.version>
+		<project.majorVersion>${MAJOR}</project.majorVersion>
+		<project.minorVersion>${MINOR}</project.minorVersion>
 	</properties>
 	<dependencies>
 		<dependency>
