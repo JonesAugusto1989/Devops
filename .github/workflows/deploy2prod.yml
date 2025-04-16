@@ -9,10 +9,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: ConfigGit
-        run: |
-          git config user.name "[Bot]GitHubActions"
-          git config user.email "BotDevOps@teste.com"
       - name: Java
         uses: actions/setup-java@v4
         with:
